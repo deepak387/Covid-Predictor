@@ -1,0 +1,49 @@
+{% extends "home.html" %} {% block content %}
+<div class="content-section">
+  <form method="POST" action="">
+    {{form.hidden_tag()}}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Enter Details</legend>
+
+      <div class="form-group">
+        {{ form.state.label(class="form-control-label") }}
+        {{form.state(class="form-control form-control-lg") }}
+      </div>
+      <div class="form-group">
+        {{ form.dates.label(class="form-control-label") }} {% if
+        form.dates.errors %} {{form.dates(class="form-control form-control-lg
+        is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.dates.errors %}
+          <span>{{error}}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{form.dates(class="form-control form-control-lg",
+        placeholder="YYYY-MM-DD") }} {% endif %}
+      </div>
+      <div class="form-group">
+        <p>For confirmed cases type 1</p>
+        <p>For death prediction type 2</p>
+        <p>For recovered cases type 3</p>
+        <p>For active cases type 4</p>
+        <p>All info type 5</p>
+      </div>
+      <div class="form-group">
+        {{ form.options.label(class="form-control-label") }}
+        {{form.options(class="form-control form-control-lg") }}
+      </div>
+      <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info")}}
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="content-section">
+    {% if error==0 %} {% for i in range(4): %} {% if ans[i] != -1 %}
+    {{labels[i]}} {{ans[i]}}<br />
+    {% endif %} {% endfor %} {% else %} Invalid Data {% endif %}
+  </div>
+  <br />
+  <br />
+</div>
+{% endblock content %}
